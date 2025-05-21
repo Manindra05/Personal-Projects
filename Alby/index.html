@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ALBY - Learn English Together!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="alby-container">
+      <img src="images/alby2.png" alt="Alby the Blob" id="albyImage">
+    </div>
+
+    <h1>ALBY - Learn English Together!</h1>
+    <p class="subtitle">Your friendly speaking buddy for real-life English conversations!</p>
+
+    <div class="topic-selection" id="topicSelection">
+      <p>Choose a topic to practice:</p>
+      <button onclick="selectTopic('Job Interviews')">💼 Job Interviews</button>
+      <button onclick="selectTopic('Ordering at a Restaurant')">🍽️ Restaurant</button>
+      <button onclick="selectTopic('Doctor Visits')">🩺 Doctor Visit</button>
+      <button onclick="selectTopic('Daily Conversation')">🗣️ Daily Conversation</button>
+      <button onclick="selectTopic('Making Friends')">🤝 Making Friends</button>
+    </div>
+
+    <div class="mode-selection" id="modeSelection" style="display:none;">
+      <p>How would you like to practice?</p>
+      <button onclick="selectMode('general')">🧠 General Practice</button>
+      <button onclick="selectMode('roleplay')">🎭 Roleplay Practice</button>
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="textInput" placeholder="Type your answer... or your own topic!">
+      <button class="submit-btn" onclick="sendText()">Submit Answer</button>
+      <button class="mic-btn" onclick="startListening()">🎤 Speak</button>
+      <button class="reset-btn" onclick="resetTopic()">Start New Topic</button>
+    </div>
+
+    <div class="response-container" id="responseContainer"></div>
+
+    <div class="action-buttons" id="actionButtons" style="display: none;">
+      <button class="accept-btn" onclick="moveOn()">✅ Move On</button>
+      <button class="tryagain-btn" onclick="tryAgain()">❌ Try Again</button>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
