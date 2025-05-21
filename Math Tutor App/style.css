@@ -1,0 +1,172 @@
+:root {
+  --bg-color: #f8f9fb;
+  --gradient: linear-gradient(135deg, #f8f9fb, #e8ecf3);
+  --text-color: #1a1a1a;
+  --card-bg: white;
+  --border-color: #aaa;
+  --btn-bg: #4a90e2;
+  --btn-hover: #357ab8;
+  --progress-bg: #e0e0e0;
+  --progress-fill: #5cb85c;
+  --home-btn-bg: #e3e3e3;
+  --home-btn-hover: #c5c5c5;
+  --card-shadow: rgba(0, 0, 0, 0.08);
+}
+
+body.dark-mode {
+  --bg-color: #1e1e1e;
+  --gradient: linear-gradient(135deg, #1e1e1e, #2a2d35);
+  --text-color: #f0f0f0;
+  --card-bg: #2c2f36;
+  --border-color: #555;
+  --btn-bg: #6c63ff;
+  --btn-hover: #574fd6;
+  --progress-bg: #444;
+  --progress-fill: #77dd77;
+  --home-btn-bg: #444;
+  --home-btn-hover: #666;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--gradient);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+#tutor-card {
+  background: var(--card-bg);
+  padding: 3rem 2rem;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px var(--card-shadow);
+  text-align: center;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+h2, h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: var(--text-color);
+}
+
+#question {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+input[type="text"] {
+  padding: 0.7rem;
+  width: 60%;
+  max-width: 300px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background: var(--card-bg);
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+button {
+  margin: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  background-color: var(--btn-bg);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--btn-hover);
+}
+
+#response {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+#progress-container {
+  width: 100%;
+  background-color: var(--progress-bg);
+  border-radius: 10px;
+  margin-top: 2rem;
+  height: 20px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  background-color: var(--progress-fill);
+  width: 0%;
+  transition: width 0.4s ease;
+  border-radius: 10px;
+}
+
+.level-group {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.level-group h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 0.5rem 1rem;
+  background: var(--home-btn-bg);
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: var(--text-color);
+}
+
+.home-btn:hover {
+  background-color: var(--home-btn-hover);
+}
+
+/* Toggle button (add in your HTML) */
+#theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.3s ease;
+}
+
+#theme-toggle:hover {
+  background: var(--border-color);
+  color: white;
+}

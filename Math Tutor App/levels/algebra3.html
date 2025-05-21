@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Algebra III</title>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+  <div id="tutor-card">
+    <button class="home-btn" onclick="location.href='../index.html'">← Back to Home</button>
+    <h2>Algebra III Tutor</h2>
+    <div id="question"><em>Loading...</em></div>
+    <input type="text" id="userAnswer" placeholder="Your answer..." />
+    <button onclick="submitAnswer()">Submit</button>
+    <div id="response"></div>
+    <button id="nextQuestionBtn" onclick="getNextQuestion()" style="display:none; margin-top: 1rem;">Next Question</button>
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+  </div>
+
+  <script src="../app.js"></script>
+  <script>
+    const currentLevelKey = "xp-algebra3";
+
+    let chatHistory = [
+      {
+        role: "system",
+        content: `You are a Algebra III tutor. Ask the student one question at a time that can be answered in the textbox. After they answer, check it, give helpful feedback, and then wait for the student to click the 'Next Question' button before giving the next one. Do not automatically continue. Use LaTeX like \( y = mx + b \) for math.`
+      }
+    ];
+
+    async function getNextQuestion() {
+      const reply = await askGPTFromHistory(chatHistory);
+      chatHistory.push({ role: "assistant", content: reply });
+
+      document.getElementById("question").innerHTML = reply;
+      document.getElementById("response").innerText = "";
+      document.getElementById("userAnswer").value = "";
+      document.getElementById("nextQuestionBtn").style.display = "none";
+      if (window.MathJax) MathJax.typeset();
+    }
+
+    async function submitAnswer() {
+      const answer = document.getElementById("userAnswer").value.trim();
+      if (!answer) return;
+
+      document.getElementById("response").innerText = "Thinking...";
+      document.getElementById("nextQuestionBtn").style.display = "none";
+
+      chatHistory.push({ role: "user", content: answer });
+      const response = await askGPTFromHistory(chatHistory);
+      chatHistory.push({ role: "assistant", content: response });
+
+      document.getElementById("response").innerHTML = response;
+      if (window.MathJax) MathJax.typeset();
+
+      const cleaned = response.toLowerCase();
+      if (cleaned.includes("correct") || cleaned.includes("good job") || cleaned.includes("well done")) {
+        addXP(currentLevelKey, 10);
+      }
+
+      updateProgressBar(currentLevelKey);
+      document.getElementById("nextQuestionBtn").style.display = "inline-block";
+    }
+
+    function addXP(levelKey, points) {
+      const currentXP = parseInt(localStorage.getItem(levelKey) || "0");
+      localStorage.setItem(levelKey, currentXP + points);
+    }
+
+    function getXP(levelKey) {
+      return parseInt(localStorage.getItem(levelKey) || "0");
+    }
+
+    function updateProgressBar(levelKey) {
+      const xp = getXP(levelKey);
+      const cappedXP = Math.min(xp, 100);
+      document.getElementById("progress-bar").style.width = `${cappedXP}%`;
+    }
+
+    updateProgressBar(currentLevelKey);
+    getNextQuestion();
+  </script>
+</body>
+</html>

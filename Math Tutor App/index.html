@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Math Proficiency Tutor</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      min-height: 100vh;
+      color: #222;
+    }
+    body.dark-mode {
+      background: linear-gradient(160deg, #280035, #2a2d35);
+      color: #f0f0f0;
+    }
+    .progress-button {
+      position: relative;
+      width: 200px;
+      height: 40px;
+      background-color: #ddd;
+      border: none;
+      border-radius: 10px;
+      margin: 0.5rem;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background-color: #4caf50;
+      transition: width 0.4s ease;
+      z-index: 0;
+    }
+    .progress-label {
+      position: relative;
+      z-index: 1;
+      font-size: 1rem;
+      color: #000;
+    }
+    body.dark-mode .progress-label {
+      color: #fff;
+    }
+    .completed::after {
+      content: " ✅";
+      color: #28a745;
+    }
+  #tutor-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  text-align: center;
+}
+body.dark-mode #tutor-card {
+  background: #2b2b2b;
+}
+</style>
+</head>
+<body>
+  <div id="tutor-card">
+    <button id="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+    <h1>Math Proficiency Tutor</h1>
+    <p>Select a subject and level:</p>
+
+    <div class="level-group">
+      <h3>Algebra</h3>
+      <button class="progress-button" onclick="location.href='levels/algebra1.html'">
+        <div class="progress-fill" id="bar-algebra1"></div>
+        <span class="progress-label" id="label-algebra1">Algebra I</span>
+      </button>
+      <button class="progress-button" onclick="location.href='levels/algebra2.html'">
+        <div class="progress-fill" id="bar-algebra2"></div>
+        <span class="progress-label" id="label-algebra2">Algebra II</span>
+      </button>
+      <button class="progress-button" onclick="location.href='levels/algebra3.html'">
+        <div class="progress-fill" id="bar-algebra3"></div>
+        <span class="progress-label" id="label-algebra3">Algebra III</span>
+      </button>
+    </div>
+
+    <div class="level-group">
+      <h3>Calculus</h3>
+      <button class="progress-button" onclick="location.href='levels/calculus1.html'">
+        <div class="progress-fill" id="bar-calculus1"></div>
+        <span class="progress-label" id="label-calculus1">Calculus I</span>
+      </button>
+      <button class="progress-button" onclick="location.href='levels/calculus2.html'">
+        <div class="progress-fill" id="bar-calculus2"></div>
+        <span class="progress-label" id="label-calculus2">Calculus II</span>
+      </button>
+      <button class="progress-button" onclick="location.href='levels/calculus3.html'">
+        <div class="progress-fill" id="bar-calculus3"></div>
+        <span class="progress-label" id="label-calculus3">Calculus III</span>
+      </button>
+    </div>
+
+    <div class="level-group">
+      <h3>Geometry</h3>
+      <button class="progress-button" onclick="location.href='levels/geometry.html'">
+        <div class="progress-fill" id="bar-geometry"></div>
+        <span class="progress-label" id="label-geometry">Start Geometry</span>
+      </button>
+    </div>
+
+    <div class="level-group">
+      <h3>Statistics</h3>
+      <button class="progress-button" onclick="location.href='levels/statistics.html'">
+        <div class="progress-fill" id="bar-statistics"></div>
+        <span class="progress-label" id="label-statistics">Start Statistics</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+      }
+
+      const levels = ["algebra1", "algebra2", "algebra3", "calculus1", "calculus2", "calculus3", "geometry", "statistics"];
+      levels.forEach(level => {
+        const xp = Math.min(parseInt(localStorage.getItem("xp-" + level) || "0"), 100);
+
+        const fill = document.getElementById("bar-" + level);
+        const label = document.getElementById("label-" + level);
+
+        if (fill) fill.style.width = xp + "%";
+        if (label && xp >= 100) label.classList.add("completed");
+      });
+    };
+  </script>
+</body>
+</html>
