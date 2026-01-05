@@ -7,8 +7,8 @@ from alpaca.data.timeframe import TimeFrame
 from datetime import datetime, timedelta
 
 # --- CONFIG ---
-API_KEY = "PKZLAB27TCM4V4GIMIQPI5CQ5C"       # <--- PASTE YOUR KEY HERE
-SECRET_KEY = "28FZZ2Xrr7QYnoR5xYkoLbqFiaJX5HbAtr6vHo3WGXwH" # <--- PASTE YOUR SECRET HERE
+API_KEY = "API_KEY"       # <--- PASTE YOUR KEY HERE
+SECRET_KEY = "SECRET_KEY" # <--- PASTE YOUR SECRET HERE
 SYMBOL = "GLD"                 # We will predict the S&P 500
 
 # 1. GET THE LATEST DATA
@@ -62,4 +62,5 @@ elif prediction[0] == -1:
 else:
     print(f"⚪ HOLD / NEUTRAL")
     print("No strong signal detected.")
+
 print("--------------------------------")
