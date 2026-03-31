@@ -10,8 +10,8 @@ from alpaca.trading.requests import MarketOrderRequest
 from alpaca.trading.enums import OrderSide, TimeInForce
 
 # --- CONFIGURATION ---
-API_KEY = "YOUR_API_KEY"       # <--- PASTE KEYS AGAIN
-SECRET_KEY = "YOUR_SECRET_KEY" # <--- PASTE KEYS AGAIN
+API_KEY = [YOUR_API_KEY]
+SECRET_KEY = [YOUR_SECRET_KEY]
 SYMBOL = "QQQ"
 QUANTITY = 1                   # How many shares to trade
 
