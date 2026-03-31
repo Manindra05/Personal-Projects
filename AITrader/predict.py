@@ -7,8 +7,8 @@ from alpaca.data.timeframe import TimeFrame
 from datetime import datetime, timedelta
 
 # --- CONFIG ---
-API_KEY = "API_KEY"       # <--- PASTE YOUR KEY HERE
-SECRET_KEY = "SECRET_KEY" # <--- PASTE YOUR SECRET HERE
+API_KEY = [API_KEY]
+SECRET_KEY = [SECRET_KEY]
 SYMBOL = "GLD"                 # We will predict the S&P 500
 
 # 1. GET THE LATEST DATA
