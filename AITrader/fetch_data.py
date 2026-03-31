@@ -6,8 +6,8 @@ from alpaca.data.timeframe import TimeFrame
 from datetime import datetime
 
 # 1. SETUP
-API_KEY = "PKZLAB27TCM4V4GIMIQPI5CQ5C"
-SECRET_KEY = "28FZZ2Xrr7QYnoR5xYkoLbqFiaJX5HbAtr6vHo3WGXwH"
+API_KEY = [INSERT API KEY]
+SECRET_KEY = [INSER SECRET KEY]
 client = StockHistoricalDataClient(API_KEY, SECRET_KEY)
 
 # 2. CONFIGURE THE REQUEST
