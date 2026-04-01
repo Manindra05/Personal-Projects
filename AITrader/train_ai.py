@@ -1,29 +1,37 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
+import pandas_ta as ta 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
-import joblib  # This is what saves the "Brain" as a file
+import joblib  
+import pandas_ta as ta 
 
-# 1. LOAD THE DATA
-print("Loading labeled data...")
+
+
+# 2. LOAD DATA
 df = pd.read_csv("data/labeled_trading_data.csv")
 
-# Clean up: Drop rows with NaN values (common in the first 200 rows due to SMA calculations)
+# 1. CALCULATE BOTH INDICATORS
+df['EMA_20'] = ta.ema(df['close'], length=20)
+df['SMA_200'] = ta.sma(df['close'], length=200) 
+
+df['RSI'] = ta.rsi(df['close'], length=14)
+df['ATR'] = ta.atr(df['high'], df['low'], df['close'], length=14)
+
 df = df.dropna()
 
-# 2. SEPARATE "QUESTIONS" (Features) FROM "ANSWERS" (Target)
-# We only want the AI to see the technical indicators
-feature_cols = ['SMA_50', 'SMA_200', 'RSI', 'ATR']
-X = df[feature_cols]
+# 2. GIVE THE AI BOTH TOOLS
+features = ['EMA_20', 'SMA_200', 'RSI', 'ATR']
+
+X = df[features]
 y = df['target']
 
+
 # 3. SPLIT INTO TRAINING (80%) AND TESTING (20%)
-# random_state=42 ensures we get the same split every time (good for science!)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# 4. TRAIN THE MODEL (The "Study" Phase)
-# n_estimators=100 means "Create 100 mini-decision trees and vote on the answer"
-print("Training the AI... (This plays the Rocky montage music)")
+# 4. TRAIN THE MODEL
+print("Training the AI...")
 model = RandomForestClassifier(n_estimators=100, min_samples_split=10, random_state=1)
 model.fit(X_train, y_train)
 
@@ -38,6 +46,5 @@ print("\nDetailed Report:")
 print(classification_report(y_test, predictions))
 
 # 6. SAVE THE BRAIN
-# This creates the physical file you can use later
 joblib.dump(model, "trading_model.pkl")
 print("Saved model to 'trading_model.pkl'")
